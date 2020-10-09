@@ -22,7 +22,16 @@ class TANKGAME_API APawnBase : public APawn
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	USceneComponent* ProjectileSpawnPoint;
 
+protected:
+
+	void RotateTurret(FVector LookAtTarget);
+
+	void Fire();
+
+	virtual void HandleDestruction();
+
 public:
 	// Sets default values for this pawn's properties
 	APawnBase();
+
 };

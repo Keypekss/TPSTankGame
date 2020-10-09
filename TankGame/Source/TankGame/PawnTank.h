@@ -16,18 +16,23 @@ class TANKGAME_API APawnTank : public APawnBase
 private:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-	USpringArmComponent* SpringArmComp;
+	USpringArmComponent* SpringArm;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-	UCameraComponent* CameraComp;
+	UCameraComponent* Camera;
 
 	FVector	MoveDirection;
 	FQuat	RotationDirection;
 
-	float	MoveSpeed;
-	float	RotateSpeed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement", meta = (AllowPrivateAccess = "true"))
+	float	MoveSpeed = 100.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement", meta = (AllowPrivateAccess = "true"))
+	float	RotateSpeed = 100.0f;
 
 	void CalculateMoveInput(float value);
-	void CalculateRotationInput(float value);
+	void CalculateRotateInput(float value);
+
+	APlayerController* PlayerControllerRef;
+	FHitResult TraceHitResult;
 
 	void Move();
 	void Rotate();
@@ -45,4 +50,6 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	virtual void HandleDestruction() override;
 };
