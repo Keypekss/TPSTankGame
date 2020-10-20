@@ -6,6 +6,9 @@
 #include "GameFramework/GameModeBase.h"
 #include "TankGameModeBase.generated.h"
 
+class APawnTurret;
+class APawnTank;
+class APlayerControllerBase;
 
 UCLASS()
 class TANKGAME_API ATankGameModeBase : public AGameModeBase
@@ -27,5 +30,13 @@ private:
 	void HandleGameStart();
 	void HandleGameOver(bool PlayerWon);
 
+	int32 TargetTurrets = 0;
+	int32 GetTargetTurretCount();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Game Loop", meta = (AllowPrivateAccess = "true"))
+	int StartDelay = 3;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player", meta = (AllowPrivateAccess = "true"))
+	APawnTank* PlayerTank;
+	APlayerControllerBase* PlayerControllerRef;
 };

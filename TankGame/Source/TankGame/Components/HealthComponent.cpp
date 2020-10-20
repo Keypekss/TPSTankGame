@@ -12,7 +12,6 @@ UHealthComponent::UHealthComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
 
-	Health = DefaultHealth;
 }
 
 // Called when the game starts
@@ -21,6 +20,7 @@ void UHealthComponent::BeginPlay()
 	Super::BeginPlay();
 
 	GameModeRef = Cast<ATankGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
+	Health = DefaultHealth;
 
 	Owner = GetOwner();
 	if (Owner)
